@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Minecraft Pastel Quiz → Sarcasm University Certificate</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --pink: #ffd6e0;
+    --purple: #d9b8ff;
+    --blue: #b8e0ff;
+    --maroon: #a83232;
+    --accent: #cfa84b;
+    --muted: #7a7a86;
+    --dark: #222;
+  }
+
+  body {
+    background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
+    font-family: 'Press Start 2P', cursive;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    color: #333;
+    padding: 1rem;
+  }
+
+  .question-box {
+    background-color: var(--pink);
+    border: 4px solid #9c89b8;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding: 2rem;
+    text-align: center;
+    width: 90%;
+    max-width: 480px;
+    transition: background-color 0.6s ease;
+    margin-top: 40px;
+  }
+
+  .question {
+    margin-bottom: 1.5rem;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  button {
+    background: #a38dfc;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    box-shadow: 0 3px 0 #6b5fad;
+    transition: transform 0.1s ease, background 0.3s;
+  }
+
+  button:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #6b5fad;
+  }
+
+  #hidden-section {
+    display: none;
+    margin-top: 40px;
+    animation: fadeIn 1s ease forwards;
+    width: 100%;
+    max-width: 960px;
+    font-family: 'Inter', system-ui;
+    position: relative;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  .wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .certificate {
+    background: #fffefc;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(20,20,30,0.08);
+    padding: 36px;
+    width: 95%;
+    max-width: 900px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .logo {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    background: linear-gradient(135deg,#fff9f0,#fff3d9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(207,168,75,0.12);
+    flex-shrink: 0;
+  }
+
+  .title-block {
+    flex: 1;
+    min-width: 180px;
+  }
+
+  .uni-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--maroon);
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .sub {
+    font-size: 14px;
+    color: var(--maroon);
+    margin-top: 4px;
+  }
+
+  .badge {
+    text-align: right;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .cert-verb {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: var(--dark);
+    margin: 24px 0 6px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--maroon);
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .desc {
+    color: var(--muted);
+    margin: 10px auto;
+    font-size: 14px;
+    max-width: 90%;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .mini-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 18px;
+  }
+
+  .mini-form input {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+    font-size: 14px;
+    width: 140px;
+  }
+
+  .mini-form button {
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(207,168,75,0.18);
+    font-size: 14px;
+  }
+
+  #confetti-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  @media (max-width: 600px) {
+    body {
+      font-size: 12px;
+      padding: 1rem;
+    }
+
+    .question-box {
+      padding: 1.2rem;
+      width: 95%;
+    }
+
+    .certificate {
+      padding: 1.5rem;
+      width: 100%;
+    }
+
+    .uni-name {
+      font-size: 20px;
+    }
+
+    .cert-verb {
+      font-size: 20px;
+    }
+
+    .name {
+      font-size: 26px;
+    }
+
+    .desc {
+      font-size: 13px;
+    }
+  }
+</style>
+</head>
+
+<body>
+<canvas id="confetti-canvas"></canvas>
+
+<div class="question-box" id="question-box">
+  <div class="question" id="question-text">Ready to risk a blush?</div>
+  <div class="btn-container">
+    <button onclick="nextQuestion('yes')">Yes</button>
+    <button onclick="nextQuestion('no')">No</button>
+  </div>
+</div>
+
+<div id="hidden-section">
+  <div class="wrap">
+    <div class="certificate" id="certificate-root">
+      <div class="head">
+        <div class="logo">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="52" height="52" rx="10" fill="#fff"/>
+            <path d="M20 38c4-8 24-8 28 0" stroke="#cfa84b" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="24" cy="22" r="4" fill="#cfa84b"/>
+            <circle cx="40" cy="22" r="4" fill="#cfa84b"/>
+          </svg>
+        </div>
+        <div class="title-block">
+          <h3 class="uni-name">Sarcasm University</h3>
+          <div class="sub">Certificate of Sarcastic Excellence</div>
+        </div>
+        <div class="badge">
+          <div>Topper - Batch 2025</div>
+        </div>
+      </div>
+
+      <div class="cert-verb">This certifies that</div>
+      <div class="name" id="cert-name">Yasmine</div>
+      <div class="desc" id="cert-desc">Has demonstrated exceptional comedic timing and sarcastic excellence.</div>
+
+      <div class="meta">
+        <div>Date: <span id="cert-date"></span></div>
+        <div>Serial: <span id="cert-serial"></span></div>
+      </div>
+
+      <div class="footer">
+        <div>Issued under the authority of Sarcasm Council</div>
+        <div>www.sarcasmuni.example</div>
+      </div>
+    </div>
+
+    <div class="mini-form">
+      <input id="input-date" placeholder="Date"/>
+      <input id="input-serial" placeholder="Serial"/>
+      <button id="apply">Apply</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  const questions = [
+    "Ready to risk a blush?",
+    "Are you the kind of girl who makes sarcasm look cute?",
+    "Is it you—the one who can make people smile just by existing?",
+    "Ready to earn your degree?"
+  ];
+  const colors = ["#ffd6e0","#e3b8ff","#c7b8ff","#b8d4ff","#b8e0ff"];
+  let index = 0;
+
+  function nextQuestion(ans){
+    if(ans==='yes'){
+      index++;
+      const box=document.getElementById("question-box");
+      const text=document.getElementById("question-text");
+      if(index<questions.length){
+        text.textContent=questions[index];
+        box.style.backgroundColor=colors[index%colors.length];
+      } else {
+        box.style.display="none";
+        document.getElementById("hidden-section").style.display="block";
+        launchConfetti();
+      }
+    } else {
+      alert("Come back when you’re ready for pastel adventures 💫");
+    }
+  }
+
+  function launchConfetti(){
+    const duration = 3000;
+    const end = Date.now() + duration;
+    (function frame() {
+      confetti({
+        particleCount: 5,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors: ['#ffd6e0','#e3b8ff','#b8e0ff']
+      });
+      confetti({
+        particleCount: 5,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors: ['#ffd6e0','#e3b8ff','#b8e0ff']
+      });
+      if (Date.now() < end) requestAnimationFrame(frame);
+    })();
+  }
+
+  const dateEl=document.getElementById('cert-date');
+  const serialEl=document.getElementById('cert-serial');
+  const inputDate=document.getElementById('input-date');
+  const inputSerial=document.getElementById('input-serial');
+
+  const today=new Date();
+  const months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  inputDate.value=`${months[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`;
+  inputSerial.value='SU-'+today.getFullYear()+'-'+Math.floor(Math.random()*900+100);
+  dateEl.textContent=inputDate.value;
+  serialEl.textContent=inputSerial.value;
+
+  document.getElementById('apply').addEventListener('click',()=>{
+    dateEl.textContent=inputDate.value;
+    serialEl.textContent=inputSerial.value;
+  });
+</script>
+</body>
+</html>
